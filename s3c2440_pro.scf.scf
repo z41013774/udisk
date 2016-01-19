@@ -1,0 +1,24 @@
+;LR_1 0x0
+;{
+;  RO  0x0
+;  { 
+;  	start.o (init,+First)
+;  }
+; }
+ LR_2 0x30000000
+ {
+  RO +0
+  {
+  	start.o (init,+First)
+	*(+RO)
+  }
+  RW +0
+  { 
+  	*(+RW)
+  }
+  
+  ZI +0
+  { 
+  	*(+ZI)
+  }
+}
