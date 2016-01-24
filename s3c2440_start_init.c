@@ -53,5 +53,6 @@ void judgecodeposition()
 #endif
 void copycodetoddr()
 {
+
 }
 

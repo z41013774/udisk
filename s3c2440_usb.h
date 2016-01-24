@@ -17,6 +17,9 @@
 #define ENDPOINT2			2
 #define ENDPOINT3			3
 
+#define ENDPOINT1_SIZE		64
+#define ENDPOINT3_SIZE		ENDPOINT1_SIZE
+
 #define U_LINE	__inline
 #define SECTOR			512
 /*ep0 status*/
@@ -125,6 +128,7 @@ static void usb_put_one_sector(uint8_t *host_data);
 static void usb_get_one_sector(uint8_t *host_data);
 
 void usb_set_fifo(uint8_t *fifo,uint32_t size);
+void usb_get_fifo(uint8_t *fifo,uint32_t size);
 
 
 void init_512byte_data(char *data,int sec_num,int lba);

@@ -5,106 +5,106 @@ Memory Map of the image
 
   Image Entry point : 0x30000000
 
-  Load Region LR_1 (Base: 0x30000000, Size: 0x0000707c, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x30000000, Size: 0x00007578, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Base: 0x30000000, Size: 0x00007078, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x30000000, Size: 0x00007574, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr  Idx  E Section Name        Object
 
     0x30000000   0x000001c8   Code   RO     1   * init                start.o
-    0x300001c8   0x000000a8   Code   RO   374   * !!!                 __main.o(c_a__un.l)
+    0x300001c8   0x000000a8   Code   RO   389   * !!!                 __main.o(c_a__un.l)
     0x30000270   0x000000a8   Code   RO    25     .text               main.o
     0x30000318   0x0000008c   Code   RO    84     .text               s3c2440_start_init.o
     0x300003a4   0x000000e8   Code   RO   102     .text               s3c2440_uart.o
     0x3000048c   0x00000084   Code   RO   121     .text               s3c2440_clk_power.o
-    0x30000510   0x000007f8   Code   RO   181     .text               s3c2440_nandflash.o
-    0x30000d08   0x0000028c   Code   RO   238     .text               s3c2440_mmu.o
-    0x30000f94   0x0000086c   Code   RO   252     .text               s3c2440_usb.o
-    0x30001800   0x00000b18   Code   RO   291     .text               s3c2440_usb_desc.o
-    0x30002318   0x00000094   Code   RO   316     .text               s3c2440_usb_scsi.o
-    0x300023ac   0x00000020   Code   RO   328     .text               s3c2440_usb_util.o
-    0x300023cc   0x00000b84   Code   RO   352     .text               s3c2440_ftl.o
-    0x30002f50   0x00000420   Code   RO   365     .text               bootloader.o
-    0x30003370   0x00000008   Code   RO   376     .text               _no_redirect.o(c_a__un.l)
-    0x30003378   0x000000c0   Code   RO   378     .text               rt_udiv.o(c_a__un.l)
-    0x30003438   0x00000058   Code   RO   380     .text               vsprintf.o(c_a__un.l)
-    0x30003490   0x00000d38   Code   RO   391     .text               __vfpntf.o(c_a__un.l)
-    0x300041c8   0x0000001c   Code   RO   393     .text               _sputc.o(c_a__un.l)
-    0x300041e4   0x00000028   Code   RO   395     .text               kernel.o(c_a__un.l)
-    0x3000420c   0x0000000c   Code   RO   397     .text               rt_div0.o(c_a__un.l)
-    0x30004218   0x00000010   Code   RO   399     .text               rt_fp_status_addr.o(c_a__un.l)
-    0x30004228   0x00000924   Code   RO   411     .text               _fp_disp.o(c_a__un.l)
-    0x30004b4c   0x00000018   Code   RO   413     .text               exit.o(c_a__un.l)
-    0x30004b64   0x000000fc   Code   RO   415     .text               lib_init.o(c_a__un.l)
-    0x30004c60   0x0000000c   Code   RO   417     .text               libspace.o(c_a__un.l)
-    0x30004c6c   0x00000098   Code   RO   420     .text               lludiv10.o(c_a__un.l)
-    0x30004d04   0x00000018   Code   RO   422     .text               rt_raise.o(c_a__un.l)
-    0x30004d1c   0x0000002c   Code   RO   424     .text               rtudiv10.o(c_a__un.l)
-    0x30004d48   0x000000fc   Code   RO   426     .text               stkheap1.o(c_a__un.l)
-    0x30004e44   0x00000068   Code   RO   428     .text               strlen.o(c_a__un.l)
-    0x30004eac   0x00000018   Code   RO   430     .text               sys_exit.o(c_a__un.l)
-    0x30004ec4   0x00000064   Code   RO   436     .text               __raise.o(c_a__un.l)
-    0x30004f28   0x00000060   Code   RO   438     .text               _fptrap.o(c_a__un.l)
-    0x30004f88   0x0000015c   Code   RO   440     .text               bigflt0.o(c_a__un.l)
-    0x300050e4   0x0000003c   Code   RO   445     .text               lc_numeric_c.o(c_a__un.l)
-    0x30005120   0x000000d4   Code   RO   448     .text               rt_sdiv.o(c_a__un.l)
-    0x300051f4   0x00000040   Code   RO   450     .text               rtsdiv10.o(c_a__un.l)
-    0x30005234   0x00000044   Code   RO   452     .text               sys_stackheap.o(c_a__un.l)
-    0x30005278   0x00000004   Code   RO   454     .text               use_semi.o(c_a__un.l)
-    0x3000527c   0x00000048   Code   RO   460     .text               classify.o(m_a_pu.l)
-    0x300052c4   0x00000054   Code   RO   462     .text               dtoi.o(m_a_pu.l)
-    0x30005318   0x00000160   Code   RO   464     .text               defsig.o(c_a__un.l)
-    0x30005478   0x000000a0   Code   RO   468     .text               strcmp.o(c_a__un.l)
-    0x30005518   0x00000018   Code   RO   470     .text               sys_wrch.o(c_a__un.l)
-    0x30005530   0x000001b4   Code   RO   248     C$$code             mmulib.o
-    0x300056e4   0x00000898   Code   RO   443     CL$$btodstuff       btod.o(c_a__un.l)
-    0x30005f7c   0x00000014   Code   RO   183     i.nand_chip_disel   s3c2440_nandflash.o
-    0x30005f90   0x00000014   Code   RO   182     i.nand_chip_sel     s3c2440_nandflash.o
-    0x30005fa4   0x00000014   Code   RO   185     i.nand_clear_rb     s3c2440_nandflash.o
-    0x30005fb8   0x00000014   Code   RO   184     i.nand_detect_rb    s3c2440_nandflash.o
-    0x30005fcc   0x0000049c   Code   RO   382     x$fpl$dadd          daddsub.o(f_a_p.l)
-    0x30006468   0x00000040   Code   RO   403     x$fpl$dcheck        dcheck.o(f_a_p.l)
-    0x300064a8   0x00000018   Code   RO   405     x$fpl$dcheck1       dcheck1.o(f_a_p.l)
-    0x300064c0   0x000000a4   Code   RO   384     x$fpl$dfixu         dfixu.o(f_a_p.l)
-    0x30006564   0x00000064   Code   RO   387     x$fpl$dflt          dflt.o(f_a_p.l)
-    0x300065c8   0x000002b4   Code   RO   389     x$fpl$dmul          dmul_mull.o(f_a_p.l)
-    0x3000687c   0x00000230   Code   RO   407     x$fpl$dunder        dunder.o(f_a_p.l)
-    0x30006aac   0x00000164   Code   RO   409     x$fpl$exception     except.o(f_a_p.l)
-    0x30006c10   0x00000014   Code   RO   456     x$fpl$fpinit        fpinit.o(f_a_p.l)
-    0x30006c24   0x0000003c   Code   RO   458     x$fpl$ieeestatus    istatus.o(f_a_p.l)
-    0x30006c60   0x00000004   Code   RO   401     x$fpl$printf1       printf1.o(f_a_p.l)
-    0x30006c64   0x00000098   Code   RO   432     x$fpl$retnan        retnan.o(f_a_p.l)
-    0x30006cfc   0x000000a4   Code   RO   434     x$fpl$trapveneer    trapv.o(f_a_p.l)
-    0x30006da0   0x00000046   Data   RO   293     .constdata          s3c2440_usb_desc.o
-    0x30006de6   0x0000007a   Data   RO   317     .constdata          s3c2440_usb_scsi.o
-    0x30006e60   0x00000094   Data   RO   441     .constdata          bigflt0.o(c_a__un.l)
-    0x30006ef4   0x0000001c   Data   RO   446     .constdata          lc_numeric_c.o(c_a__un.l)
-    0x30006f10   0x0000012b   Data   RO   465     .constdata          defsig.o(c_a__un.l)
-    0x3000703b   0x00000001   PAD
-    0x3000703c   0x00000024   Data   RO   472     Region$$Table       anon$$obj.o
-    0x30007060   0x00000018   Data   RO   473     ZISection$$Table    anon$$obj.o
+    0x30000510   0x00000a48   Code   RO   181     .text               s3c2440_nandflash.o
+    0x30000f58   0x0000028c   Code   RO   253     .text               s3c2440_mmu.o
+    0x300011e4   0x0000084c   Code   RO   267     .text               s3c2440_usb.o
+    0x30001a30   0x00000b18   Code   RO   306     .text               s3c2440_usb_desc.o
+    0x30002548   0x00000094   Code   RO   331     .text               s3c2440_usb_scsi.o
+    0x300025dc   0x000000a0   Code   RO   343     .text               s3c2440_usb_util.o
+    0x3000267c   0x00000dc0   Code   RO   367     .text               s3c2440_ftl.o
+    0x3000343c   0x00000420   Code   RO   380     .text               bootloader.o
+    0x3000385c   0x00000008   Code   RO   391     .text               _no_redirect.o(c_a__un.l)
+    0x30003864   0x000000c0   Code   RO   393     .text               rt_udiv.o(c_a__un.l)
+    0x30003924   0x00000058   Code   RO   395     .text               vsprintf.o(c_a__un.l)
+    0x3000397c   0x00000d38   Code   RO   406     .text               __vfpntf.o(c_a__un.l)
+    0x300046b4   0x0000001c   Code   RO   408     .text               _sputc.o(c_a__un.l)
+    0x300046d0   0x00000028   Code   RO   410     .text               kernel.o(c_a__un.l)
+    0x300046f8   0x0000000c   Code   RO   412     .text               rt_div0.o(c_a__un.l)
+    0x30004704   0x00000010   Code   RO   414     .text               rt_fp_status_addr.o(c_a__un.l)
+    0x30004714   0x00000924   Code   RO   426     .text               _fp_disp.o(c_a__un.l)
+    0x30005038   0x00000018   Code   RO   428     .text               exit.o(c_a__un.l)
+    0x30005050   0x000000fc   Code   RO   430     .text               lib_init.o(c_a__un.l)
+    0x3000514c   0x0000000c   Code   RO   432     .text               libspace.o(c_a__un.l)
+    0x30005158   0x00000098   Code   RO   435     .text               lludiv10.o(c_a__un.l)
+    0x300051f0   0x00000018   Code   RO   437     .text               rt_raise.o(c_a__un.l)
+    0x30005208   0x0000002c   Code   RO   439     .text               rtudiv10.o(c_a__un.l)
+    0x30005234   0x000000fc   Code   RO   441     .text               stkheap1.o(c_a__un.l)
+    0x30005330   0x00000068   Code   RO   443     .text               strlen.o(c_a__un.l)
+    0x30005398   0x00000018   Code   RO   445     .text               sys_exit.o(c_a__un.l)
+    0x300053b0   0x00000064   Code   RO   451     .text               __raise.o(c_a__un.l)
+    0x30005414   0x00000060   Code   RO   453     .text               _fptrap.o(c_a__un.l)
+    0x30005474   0x0000015c   Code   RO   455     .text               bigflt0.o(c_a__un.l)
+    0x300055d0   0x0000003c   Code   RO   460     .text               lc_numeric_c.o(c_a__un.l)
+    0x3000560c   0x000000d4   Code   RO   463     .text               rt_sdiv.o(c_a__un.l)
+    0x300056e0   0x00000040   Code   RO   465     .text               rtsdiv10.o(c_a__un.l)
+    0x30005720   0x00000044   Code   RO   467     .text               sys_stackheap.o(c_a__un.l)
+    0x30005764   0x00000004   Code   RO   469     .text               use_semi.o(c_a__un.l)
+    0x30005768   0x00000048   Code   RO   475     .text               classify.o(m_a_pu.l)
+    0x300057b0   0x00000054   Code   RO   477     .text               dtoi.o(m_a_pu.l)
+    0x30005804   0x00000160   Code   RO   479     .text               defsig.o(c_a__un.l)
+    0x30005964   0x000000a0   Code   RO   483     .text               strcmp.o(c_a__un.l)
+    0x30005a04   0x00000018   Code   RO   485     .text               sys_wrch.o(c_a__un.l)
+    0x30005a1c   0x000001b4   Code   RO   263     C$$code             mmulib.o
+    0x30005bd0   0x00000898   Code   RO   458     CL$$btodstuff       btod.o(c_a__un.l)
+    0x30006468   0x00000018   Code   RO   183     i.nand_chip_disel   s3c2440_nandflash.o
+    0x30006480   0x00000018   Code   RO   182     i.nand_chip_sel     s3c2440_nandflash.o
+    0x30006498   0x00000018   Code   RO   185     i.nand_clear_rb     s3c2440_nandflash.o
+    0x300064b0   0x00000018   Code   RO   184     i.nand_detect_rb    s3c2440_nandflash.o
+    0x300064c8   0x0000049c   Code   RO   397     x$fpl$dadd          daddsub.o(f_a_p.l)
+    0x30006964   0x00000040   Code   RO   418     x$fpl$dcheck        dcheck.o(f_a_p.l)
+    0x300069a4   0x00000018   Code   RO   420     x$fpl$dcheck1       dcheck1.o(f_a_p.l)
+    0x300069bc   0x000000a4   Code   RO   399     x$fpl$dfixu         dfixu.o(f_a_p.l)
+    0x30006a60   0x00000064   Code   RO   402     x$fpl$dflt          dflt.o(f_a_p.l)
+    0x30006ac4   0x000002b4   Code   RO   404     x$fpl$dmul          dmul_mull.o(f_a_p.l)
+    0x30006d78   0x00000230   Code   RO   422     x$fpl$dunder        dunder.o(f_a_p.l)
+    0x30006fa8   0x00000164   Code   RO   424     x$fpl$exception     except.o(f_a_p.l)
+    0x3000710c   0x00000014   Code   RO   471     x$fpl$fpinit        fpinit.o(f_a_p.l)
+    0x30007120   0x0000003c   Code   RO   473     x$fpl$ieeestatus    istatus.o(f_a_p.l)
+    0x3000715c   0x00000004   Code   RO   416     x$fpl$printf1       printf1.o(f_a_p.l)
+    0x30007160   0x00000098   Code   RO   447     x$fpl$retnan        retnan.o(f_a_p.l)
+    0x300071f8   0x000000a4   Code   RO   449     x$fpl$trapveneer    trapv.o(f_a_p.l)
+    0x3000729c   0x00000046   Data   RO   308     .constdata          s3c2440_usb_desc.o
+    0x300072e2   0x0000007a   Data   RO   332     .constdata          s3c2440_usb_scsi.o
+    0x3000735c   0x00000094   Data   RO   456     .constdata          bigflt0.o(c_a__un.l)
+    0x300073f0   0x0000001c   Data   RO   461     .constdata          lc_numeric_c.o(c_a__un.l)
+    0x3000740c   0x0000012b   Data   RO   480     .constdata          defsig.o(c_a__un.l)
+    0x30007537   0x00000001   PAD
+    0x30007538   0x00000024   Data   RO   487     Region$$Table       anon$$obj.o
+    0x3000755c   0x00000018   Data   RO   488     ZISection$$Table    anon$$obj.o
 
 
-    Execution Region ER_RW (Base: 0x30007078, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
-
-    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
-
-    0x30007078   0x00000001   Data   RW   292     .data               s3c2440_usb_desc.o
-
-
-    Execution Region ER_ZI (Base: 0x3000707c, Size: 0x000022a4, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Base: 0x30007574, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr  Idx  E Section Name        Object
 
-    0x3000707c   0x00000100   Zero   RW   103     .bss                s3c2440_uart.o
-    0x3000717c   0x0000000c   Zero   RW   122     .bss                s3c2440_clk_power.o
-    0x30007188   0x00001070   Zero   RW   186     .bss                s3c2440_nandflash.o
-    0x300081f8   0x00000038   Zero   RW   253     .bss                s3c2440_usb.o
-    0x30008230   0x00000054   Zero   RW   294     .bss                s3c2440_usb_desc.o
-    0x30008284   0x00000001   Zero   RW   329     .bss                s3c2440_usb_util.o
-    0x30008285   0x00000003   PAD
-    0x30008288   0x00001038   Zero   RW   353     .bss                s3c2440_ftl.o
-    0x300092c0   0x00000060   Zero   RW   418     .bss                libspace.o(c_a__un.l)
+    0x30007574   0x00000001   Data   RW   307     .data               s3c2440_usb_desc.o
+
+
+    Execution Region ER_ZI (Base: 0x30007578, Size: 0x000022ac, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x30007578   0x00000100   Zero   RW   103     .bss                s3c2440_uart.o
+    0x30007678   0x0000000c   Zero   RW   122     .bss                s3c2440_clk_power.o
+    0x30007684   0x00001070   Zero   RW   186     .bss                s3c2440_nandflash.o
+    0x300086f4   0x00000038   Zero   RW   268     .bss                s3c2440_usb.o
+    0x3000872c   0x00000054   Zero   RW   309     .bss                s3c2440_usb_desc.o
+    0x30008780   0x00000001   Zero   RW   344     .bss                s3c2440_usb_util.o
+    0x30008781   0x00000003   PAD
+    0x30008784   0x00001040   Zero   RW   368     .bss                s3c2440_ftl.o
+    0x300097c4   0x00000060   Zero   RW   433     .bss                libspace.o(c_a__un.l)
 
 
 
@@ -116,184 +116,189 @@ Memory Map of the image
 
     0x00000000   0x00000010   Dbug   RW     5     .debug_abbrev       start.o
     0x00000010   0x000003ec   Dbug   RW    16     .debug_abbrev       usb_vect.o
-    0x000003fc   0x00000010   Dbug   RW   251     .debug_abbrev       mmulib.o
+    0x000003fc   0x00000010   Dbug   RW   266     .debug_abbrev       mmulib.o
     0x00000000   0x00000044   Dbug   RW    33     .debug_frame        main.o
     0x00000044   0x0000006c   Dbug   RW   101     .debug_frame        s3c2440_start_init.o
     0x000000b0   0x000000a4   Dbug   RW   116     .debug_frame        s3c2440_uart.o
     0x00000154   0x0000004c   Dbug   RW   133     .debug_frame        s3c2440_clk_power.o
-    0x000001a0   0x0000021c   Dbug   RW   195     .debug_frame        s3c2440_nandflash.o
-    0x000003bc   0x0000003c   Dbug   RW   222     .debug_frame        s3c2440_nandflash.o
-    0x000003f8   0x0000003c   Dbug   RW   227     .debug_frame        s3c2440_nandflash.o
-    0x00000434   0x0000003c   Dbug   RW   232     .debug_frame        s3c2440_nandflash.o
-    0x00000470   0x0000003c   Dbug   RW   237     .debug_frame        s3c2440_nandflash.o
-    0x000004ac   0x00000098   Dbug   RW   247     .debug_frame        s3c2440_mmu.o
-    0x00000544   0x0000021c   Dbug   RW   271     .debug_frame        s3c2440_usb.o
-    0x00000760   0x000000a0   Dbug   RW   311     .debug_frame        s3c2440_usb_desc.o
-    0x00000800   0x000000e8   Dbug   RW   325     .debug_frame        s3c2440_usb_scsi.o
-    0x000008e8   0x0000003c   Dbug   RW   337     .debug_frame        s3c2440_usb_util.o
-    0x00000924   0x00000220   Dbug   RW   362     .debug_frame        s3c2440_ftl.o
-    0x00000b44   0x00000134   Dbug   RW   373     .debug_frame        bootloader.o
-    0x00000c78   0x0000003c   Dbug   RW   375     .debug_frame        __main.o(c_a__un.l)
-    0x00000cb4   0x0000004c   Dbug   RW   377     .debug_frame        _no_redirect.o(c_a__un.l)
-    0x00000d00   0x00000044   Dbug   RW   379     .debug_frame        rt_udiv.o(c_a__un.l)
-    0x00000d44   0x00000054   Dbug   RW   381     .debug_frame        vsprintf.o(c_a__un.l)
-    0x00000d98   0x00000160   Dbug   RW   383     .debug_frame        daddsub.o(f_a_p.l)
-    0x00000ef8   0x00000074   Dbug   RW   386     .debug_frame        dfixu.o(f_a_p.l)
-    0x00000f6c   0x00000058   Dbug   RW   388     .debug_frame        dflt.o(f_a_p.l)
-    0x00000fc4   0x00000078   Dbug   RW   390     .debug_frame        dmul_mull.o(f_a_p.l)
-    0x0000103c   0x000000b0   Dbug   RW   392     .debug_frame        __vfpntf.o(c_a__un.l)
-    0x000010ec   0x0000004c   Dbug   RW   394     .debug_frame        _sputc.o(c_a__un.l)
-    0x00001138   0x00000058   Dbug   RW   396     .debug_frame        kernel.o(c_a__un.l)
-    0x00001190   0x0000003c   Dbug   RW   398     .debug_frame        rt_div0.o(c_a__un.l)
-    0x000011cc   0x0000004c   Dbug   RW   400     .debug_frame        rt_fp_status_addr.o(c_a__un.l)
-    0x00001218   0x0000003c   Dbug   RW   402     .debug_frame        printf1.o(f_a_p.l)
-    0x00001254   0x00000054   Dbug   RW   404     .debug_frame        dcheck.o(f_a_p.l)
-    0x000012a8   0x0000003c   Dbug   RW   406     .debug_frame        dcheck1.o(f_a_p.l)
-    0x000012e4   0x000000a8   Dbug   RW   408     .debug_frame        dunder.o(f_a_p.l)
-    0x0000138c   0x00000078   Dbug   RW   410     .debug_frame        except.o(f_a_p.l)
-    0x00001404   0x00000134   Dbug   RW   412     .debug_frame        _fp_disp.o(c_a__un.l)
-    0x00001538   0x0000004c   Dbug   RW   414     .debug_frame        exit.o(c_a__un.l)
-    0x00001584   0x0000007c   Dbug   RW   416     .debug_frame        lib_init.o(c_a__un.l)
-    0x00001600   0x00000044   Dbug   RW   419     .debug_frame        libspace.o(c_a__un.l)
-    0x00001644   0x00000058   Dbug   RW   421     .debug_frame        lludiv10.o(c_a__un.l)
-    0x0000169c   0x00000050   Dbug   RW   423     .debug_frame        rt_raise.o(c_a__un.l)
-    0x000016ec   0x00000044   Dbug   RW   425     .debug_frame        rtudiv10.o(c_a__un.l)
-    0x00001730   0x00000080   Dbug   RW   427     .debug_frame        stkheap1.o(c_a__un.l)
-    0x000017b0   0x0000003c   Dbug   RW   429     .debug_frame        strlen.o(c_a__un.l)
-    0x000017ec   0x00000044   Dbug   RW   431     .debug_frame        sys_exit.o(c_a__un.l)
-    0x00001830   0x0000005c   Dbug   RW   433     .debug_frame        retnan.o(f_a_p.l)
-    0x0000188c   0x00000084   Dbug   RW   435     .debug_frame        trapv.o(f_a_p.l)
-    0x00001910   0x0000005c   Dbug   RW   437     .debug_frame        __raise.o(c_a__un.l)
-    0x0000196c   0x00000064   Dbug   RW   439     .debug_frame        _fptrap.o(c_a__un.l)
-    0x000019d0   0x00000080   Dbug   RW   442     .debug_frame        bigflt0.o(c_a__un.l)
-    0x00001a50   0x00000218   Dbug   RW   444     .debug_frame        btod.o(c_a__un.l)
-    0x00001c68   0x0000004c   Dbug   RW   447     .debug_frame        lc_numeric_c.o(c_a__un.l)
-    0x00001cb4   0x00000044   Dbug   RW   449     .debug_frame        rt_sdiv.o(c_a__un.l)
-    0x00001cf8   0x00000044   Dbug   RW   451     .debug_frame        rtsdiv10.o(c_a__un.l)
-    0x00001d3c   0x0000004c   Dbug   RW   453     .debug_frame        sys_stackheap.o(c_a__un.l)
-    0x00001d88   0x00000044   Dbug   RW   455     .debug_frame        use_semi.o(c_a__un.l)
-    0x00001dcc   0x0000004c   Dbug   RW   457     .debug_frame        fpinit.o(f_a_p.l)
-    0x00001e18   0x00000050   Dbug   RW   459     .debug_frame        istatus.o(f_a_p.l)
-    0x00001e68   0x0000003c   Dbug   RW   461     .debug_frame        classify.o(m_a_pu.l)
-    0x00001ea4   0x0000004c   Dbug   RW   463     .debug_frame        dtoi.o(m_a_pu.l)
-    0x00001ef0   0x0000004c   Dbug   RW   466     .debug_frame        defsig.o(c_a__un.l)
-    0x00001f3c   0x00000054   Dbug   RW   469     .debug_frame        strcmp.o(c_a__un.l)
-    0x00001f90   0x00000048   Dbug   RW   471     .debug_frame        sys_wrch.o(c_a__un.l)
+    0x000001a0   0x00000214   Dbug   RW   195     .debug_frame        s3c2440_nandflash.o
+    0x000003b4   0x0000003c   Dbug   RW   237     .debug_frame        s3c2440_nandflash.o
+    0x000003f0   0x0000003c   Dbug   RW   242     .debug_frame        s3c2440_nandflash.o
+    0x0000042c   0x0000003c   Dbug   RW   247     .debug_frame        s3c2440_nandflash.o
+    0x00000468   0x0000003c   Dbug   RW   252     .debug_frame        s3c2440_nandflash.o
+    0x000004a4   0x00000098   Dbug   RW   262     .debug_frame        s3c2440_mmu.o
+    0x0000053c   0x0000021c   Dbug   RW   286     .debug_frame        s3c2440_usb.o
+    0x00000758   0x000000a0   Dbug   RW   326     .debug_frame        s3c2440_usb_desc.o
+    0x000007f8   0x000000e8   Dbug   RW   340     .debug_frame        s3c2440_usb_scsi.o
+    0x000008e0   0x0000006c   Dbug   RW   352     .debug_frame        s3c2440_usb_util.o
+    0x0000094c   0x00000268   Dbug   RW   377     .debug_frame        s3c2440_ftl.o
+    0x00000bb4   0x00000134   Dbug   RW   388     .debug_frame        bootloader.o
+    0x00000ce8   0x0000003c   Dbug   RW   390     .debug_frame        __main.o(c_a__un.l)
+    0x00000d24   0x0000004c   Dbug   RW   392     .debug_frame        _no_redirect.o(c_a__un.l)
+    0x00000d70   0x00000044   Dbug   RW   394     .debug_frame        rt_udiv.o(c_a__un.l)
+    0x00000db4   0x00000054   Dbug   RW   396     .debug_frame        vsprintf.o(c_a__un.l)
+    0x00000e08   0x00000160   Dbug   RW   398     .debug_frame        daddsub.o(f_a_p.l)
+    0x00000f68   0x00000074   Dbug   RW   401     .debug_frame        dfixu.o(f_a_p.l)
+    0x00000fdc   0x00000058   Dbug   RW   403     .debug_frame        dflt.o(f_a_p.l)
+    0x00001034   0x00000078   Dbug   RW   405     .debug_frame        dmul_mull.o(f_a_p.l)
+    0x000010ac   0x000000b0   Dbug   RW   407     .debug_frame        __vfpntf.o(c_a__un.l)
+    0x0000115c   0x0000004c   Dbug   RW   409     .debug_frame        _sputc.o(c_a__un.l)
+    0x000011a8   0x00000058   Dbug   RW   411     .debug_frame        kernel.o(c_a__un.l)
+    0x00001200   0x0000003c   Dbug   RW   413     .debug_frame        rt_div0.o(c_a__un.l)
+    0x0000123c   0x0000004c   Dbug   RW   415     .debug_frame        rt_fp_status_addr.o(c_a__un.l)
+    0x00001288   0x0000003c   Dbug   RW   417     .debug_frame        printf1.o(f_a_p.l)
+    0x000012c4   0x00000054   Dbug   RW   419     .debug_frame        dcheck.o(f_a_p.l)
+    0x00001318   0x0000003c   Dbug   RW   421     .debug_frame        dcheck1.o(f_a_p.l)
+    0x00001354   0x000000a8   Dbug   RW   423     .debug_frame        dunder.o(f_a_p.l)
+    0x000013fc   0x00000078   Dbug   RW   425     .debug_frame        except.o(f_a_p.l)
+    0x00001474   0x00000134   Dbug   RW   427     .debug_frame        _fp_disp.o(c_a__un.l)
+    0x000015a8   0x0000004c   Dbug   RW   429     .debug_frame        exit.o(c_a__un.l)
+    0x000015f4   0x0000007c   Dbug   RW   431     .debug_frame        lib_init.o(c_a__un.l)
+    0x00001670   0x00000044   Dbug   RW   434     .debug_frame        libspace.o(c_a__un.l)
+    0x000016b4   0x00000058   Dbug   RW   436     .debug_frame        lludiv10.o(c_a__un.l)
+    0x0000170c   0x00000050   Dbug   RW   438     .debug_frame        rt_raise.o(c_a__un.l)
+    0x0000175c   0x00000044   Dbug   RW   440     .debug_frame        rtudiv10.o(c_a__un.l)
+    0x000017a0   0x00000080   Dbug   RW   442     .debug_frame        stkheap1.o(c_a__un.l)
+    0x00001820   0x0000003c   Dbug   RW   444     .debug_frame        strlen.o(c_a__un.l)
+    0x0000185c   0x00000044   Dbug   RW   446     .debug_frame        sys_exit.o(c_a__un.l)
+    0x000018a0   0x0000005c   Dbug   RW   448     .debug_frame        retnan.o(f_a_p.l)
+    0x000018fc   0x00000084   Dbug   RW   450     .debug_frame        trapv.o(f_a_p.l)
+    0x00001980   0x0000005c   Dbug   RW   452     .debug_frame        __raise.o(c_a__un.l)
+    0x000019dc   0x00000064   Dbug   RW   454     .debug_frame        _fptrap.o(c_a__un.l)
+    0x00001a40   0x00000080   Dbug   RW   457     .debug_frame        bigflt0.o(c_a__un.l)
+    0x00001ac0   0x00000218   Dbug   RW   459     .debug_frame        btod.o(c_a__un.l)
+    0x00001cd8   0x0000004c   Dbug   RW   462     .debug_frame        lc_numeric_c.o(c_a__un.l)
+    0x00001d24   0x00000044   Dbug   RW   464     .debug_frame        rt_sdiv.o(c_a__un.l)
+    0x00001d68   0x00000044   Dbug   RW   466     .debug_frame        rtsdiv10.o(c_a__un.l)
+    0x00001dac   0x0000004c   Dbug   RW   468     .debug_frame        sys_stackheap.o(c_a__un.l)
+    0x00001df8   0x00000044   Dbug   RW   470     .debug_frame        use_semi.o(c_a__un.l)
+    0x00001e3c   0x0000004c   Dbug   RW   472     .debug_frame        fpinit.o(f_a_p.l)
+    0x00001e88   0x00000050   Dbug   RW   474     .debug_frame        istatus.o(f_a_p.l)
+    0x00001ed8   0x0000003c   Dbug   RW   476     .debug_frame        classify.o(m_a_pu.l)
+    0x00001f14   0x0000004c   Dbug   RW   478     .debug_frame        dtoi.o(m_a_pu.l)
+    0x00001f60   0x0000004c   Dbug   RW   481     .debug_frame        defsig.o(c_a__un.l)
+    0x00001fac   0x00000054   Dbug   RW   484     .debug_frame        strcmp.o(c_a__un.l)
+    0x00002000   0x00000048   Dbug   RW   486     .debug_frame        sys_wrch.o(c_a__un.l)
     0x00000000   0x0000007c   Dbug   RW     3     .debug_info         start.o
-    0x0000007c   0x00001918   Dbug   RW    18     .debug_info         usb_vect.o
-    0x00001994   0x00000074   Dbug   RW    27     .debug_info         main.o
-    0x00001a08   0x000000fc   Dbug   RW    30     .debug_info         main.o
-    0x00001b04   0x00000474   Dbug   RW    54     .debug_info         main.o
-    0x00001f78   0x0000009c   Dbug   RW    86     .debug_info         s3c2440_start_init.o
-    0x00002014   0x000000a0   Dbug   RW    89     .debug_info         s3c2440_start_init.o
-    0x000020b4   0x000000a0   Dbug   RW    92     .debug_info         s3c2440_start_init.o
-    0x00002154   0x000001c4   Dbug   RW    98     .debug_info         s3c2440_start_init.o
-    0x00002318   0x000000a4   Dbug   RW   106     .debug_info         s3c2440_uart.o
-    0x000023bc   0x000000bc   Dbug   RW   109     .debug_info         s3c2440_uart.o
-    0x00002478   0x00000074   Dbug   RW   118     .debug_info         s3c2440_uart.o
-    0x000024ec   0x000002c8   Dbug   RW   113     .debug_info         s3c2440_uart.o
-    0x000027b4   0x000000a4   Dbug   RW   124     .debug_info         s3c2440_clk_power.o
-    0x00002858   0x0000013c   Dbug   RW   130     .debug_info         s3c2440_clk_power.o
-    0x00002994   0x000000d0   Dbug   RW   134     .debug_info         s3c2440_clk_power.o
-    0x00002a64   0x0000009c   Dbug   RW   189     .debug_info         s3c2440_nandflash.o
-    0x00002b00   0x00000490   Dbug   RW   200     .debug_info         s3c2440_nandflash.o
-    0x00002f90   0x00000a0c   Dbug   RW   192     .debug_info         s3c2440_nandflash.o
-    0x0000399c   0x000000a0   Dbug   RW   207     .debug_info         s3c2440_nandflash.o
-    0x00003a3c   0x000000a4   Dbug   RW   210     .debug_info         s3c2440_nandflash.o
-    0x00003ae0   0x000000a0   Dbug   RW   213     .debug_info         s3c2440_nandflash.o
-    0x00003b80   0x000000a0   Dbug   RW   216     .debug_info         s3c2440_nandflash.o
-    0x00003c20   0x000000bc   Dbug   RW   219     .debug_info         s3c2440_nandflash.o
-    0x00003cdc   0x000000bc   Dbug   RW   224     .debug_info         s3c2440_nandflash.o
-    0x00003d98   0x000000bc   Dbug   RW   229     .debug_info         s3c2440_nandflash.o
-    0x00003e54   0x000000bc   Dbug   RW   234     .debug_info         s3c2440_nandflash.o
-    0x00003f10   0x000001dc   Dbug   RW   244     .debug_info         s3c2440_mmu.o
-    0x000040ec   0x00000080   Dbug   RW   249     .debug_info         mmulib.o
-    0x0000416c   0x000000a0   Dbug   RW   255     .debug_info         s3c2440_usb.o
-    0x0000420c   0x000000a0   Dbug   RW   258     .debug_info         s3c2440_usb.o
-    0x000042ac   0x0000009c   Dbug   RW   261     .debug_info         s3c2440_usb.o
-    0x00004348   0x000002bc   Dbug   RW   278     .debug_info         s3c2440_usb.o
-    0x00004604   0x000000bc   Dbug   RW   264     .debug_info         s3c2440_usb.o
-    0x000046c0   0x0000009c   Dbug   RW   289     .debug_info         s3c2440_usb.o
-    0x0000475c   0x00000a9c   Dbug   RW   268     .debug_info         s3c2440_usb.o
-    0x000051f8   0x00000648   Dbug   RW   314     .debug_info         s3c2440_usb_desc.o
-    0x00005840   0x000002c0   Dbug   RW   304     .debug_info         s3c2440_usb_desc.o
-    0x00005b00   0x000003e0   Dbug   RW   308     .debug_info         s3c2440_usb_desc.o
-    0x00005ee0   0x00000670   Dbug   RW   312     .debug_info         s3c2440_usb_desc.o
-    0x00006550   0x00000208   Dbug   RW   322     .debug_info         s3c2440_usb_scsi.o
-    0x00006758   0x00000148   Dbug   RW   326     .debug_info         s3c2440_usb_scsi.o
-    0x000068a0   0x000000fc   Dbug   RW   334     .debug_info         s3c2440_usb_util.o
-    0x0000699c   0x00000094   Dbug   RW   338     .debug_info         s3c2440_usb_util.o
-    0x00006a30   0x0000032c   Dbug   RW   363     .debug_info         s3c2440_ftl.o
-    0x00006d5c   0x000000e4   Dbug   RW   355     .debug_info         s3c2440_ftl.o
-    0x00006e40   0x00000c90   Dbug   RW   359     .debug_info         s3c2440_ftl.o
-    0x00007ad0   0x00000080   Dbug   RW   367     .debug_info         bootloader.o
-    0x00007b50   0x000007fc   Dbug   RW   370     .debug_info         bootloader.o
+    0x0000007c   0x0000195c   Dbug   RW    18     .debug_info         usb_vect.o
+    0x000019d8   0x00000060   Dbug   RW    27     .debug_info         main.o
+    0x00001a38   0x000000e8   Dbug   RW    30     .debug_info         main.o
+    0x00001b20   0x00000460   Dbug   RW    54     .debug_info         main.o
+    0x00001f80   0x0000008c   Dbug   RW    86     .debug_info         s3c2440_start_init.o
+    0x0000200c   0x0000008c   Dbug   RW    89     .debug_info         s3c2440_start_init.o
+    0x00002098   0x0000008c   Dbug   RW    92     .debug_info         s3c2440_start_init.o
+    0x00002124   0x000001b0   Dbug   RW    98     .debug_info         s3c2440_start_init.o
+    0x000022d4   0x00000090   Dbug   RW   106     .debug_info         s3c2440_uart.o
+    0x00002364   0x000000ac   Dbug   RW   109     .debug_info         s3c2440_uart.o
+    0x00002410   0x00000074   Dbug   RW   118     .debug_info         s3c2440_uart.o
+    0x00002484   0x000002b4   Dbug   RW   113     .debug_info         s3c2440_uart.o
+    0x00002738   0x00000090   Dbug   RW   124     .debug_info         s3c2440_clk_power.o
+    0x000027c8   0x00000128   Dbug   RW   130     .debug_info         s3c2440_clk_power.o
+    0x000028f0   0x000000bc   Dbug   RW   134     .debug_info         s3c2440_clk_power.o
+    0x000029ac   0x00000088   Dbug   RW   189     .debug_info         s3c2440_nandflash.o
+    0x00002a34   0x0000047c   Dbug   RW   200     .debug_info         s3c2440_nandflash.o
+    0x00002eb0   0x0000008c   Dbug   RW   210     .debug_info         s3c2440_nandflash.o
+    0x00002f3c   0x00000094   Dbug   RW   231     .debug_info         s3c2440_nandflash.o
+    0x00002fd0   0x00000094   Dbug   RW   228     .debug_info         s3c2440_nandflash.o
+    0x00003064   0x00000094   Dbug   RW   225     .debug_info         s3c2440_nandflash.o
+    0x000030f8   0x00000090   Dbug   RW   222     .debug_info         s3c2440_nandflash.o
+    0x00003188   0x00000cbc   Dbug   RW   192     .debug_info         s3c2440_nandflash.o
+    0x00003e44   0x0000008c   Dbug   RW   207     .debug_info         s3c2440_nandflash.o
+    0x00003ed0   0x0000008c   Dbug   RW   213     .debug_info         s3c2440_nandflash.o
+    0x00003f5c   0x0000008c   Dbug   RW   216     .debug_info         s3c2440_nandflash.o
+    0x00003fe8   0x0000008c   Dbug   RW   219     .debug_info         s3c2440_nandflash.o
+    0x00004074   0x00000090   Dbug   RW   234     .debug_info         s3c2440_nandflash.o
+    0x00004104   0x00000090   Dbug   RW   239     .debug_info         s3c2440_nandflash.o
+    0x00004194   0x00000090   Dbug   RW   244     .debug_info         s3c2440_nandflash.o
+    0x00004224   0x00000090   Dbug   RW   249     .debug_info         s3c2440_nandflash.o
+    0x000042b4   0x000001c8   Dbug   RW   259     .debug_info         s3c2440_mmu.o
+    0x0000447c   0x00000080   Dbug   RW   264     .debug_info         mmulib.o
+    0x000044fc   0x0000008c   Dbug   RW   270     .debug_info         s3c2440_usb.o
+    0x00004588   0x00000090   Dbug   RW   273     .debug_info         s3c2440_usb.o
+    0x00004618   0x00000088   Dbug   RW   276     .debug_info         s3c2440_usb.o
+    0x000046a0   0x000002a8   Dbug   RW   293     .debug_info         s3c2440_usb.o
+    0x00004948   0x000000a8   Dbug   RW   279     .debug_info         s3c2440_usb.o
+    0x000049f0   0x00000088   Dbug   RW   304     .debug_info         s3c2440_usb.o
+    0x00004a78   0x00000a88   Dbug   RW   283     .debug_info         s3c2440_usb.o
+    0x00005500   0x00000634   Dbug   RW   329     .debug_info         s3c2440_usb_desc.o
+    0x00005b34   0x000002ac   Dbug   RW   319     .debug_info         s3c2440_usb_desc.o
+    0x00005de0   0x000003cc   Dbug   RW   323     .debug_info         s3c2440_usb_desc.o
+    0x000061ac   0x0000065c   Dbug   RW   327     .debug_info         s3c2440_usb_desc.o
+    0x00006808   0x000001f8   Dbug   RW   337     .debug_info         s3c2440_usb_scsi.o
+    0x00006a00   0x00000134   Dbug   RW   341     .debug_info         s3c2440_usb_scsi.o
+    0x00006b34   0x000001cc   Dbug   RW   349     .debug_info         s3c2440_usb_util.o
+    0x00006d00   0x00000080   Dbug   RW   353     .debug_info         s3c2440_usb_util.o
+    0x00006d80   0x00000348   Dbug   RW   378     .debug_info         s3c2440_ftl.o
+    0x000070c8   0x000000d0   Dbug   RW   370     .debug_info         s3c2440_ftl.o
+    0x00007198   0x00000ea0   Dbug   RW   374     .debug_info         s3c2440_ftl.o
+    0x00008038   0x0000006c   Dbug   RW   382     .debug_info         bootloader.o
+    0x000080a4   0x000007e4   Dbug   RW   385     .debug_info         bootloader.o
     0x00000000   0x000000ac   Dbug   RW     4     .debug_line         start.o
-    0x000000ac   0x00000058   Dbug   RW    17     .debug_line         usb_vect.o
-    0x00000104   0x000000c4   Dbug   RW    26     .debug_line         main.o
-    0x000001c8   0x000000c4   Dbug   RW    29     .debug_line         main.o
-    0x0000028c   0x00000060   Dbug   RW    34     .debug_line         main.o
-    0x000002ec   0x0000006c   Dbug   RW    53     .debug_line         main.o
-    0x00000358   0x0000006c   Dbug   RW    63     .debug_line         main.o
-    0x000003c4   0x00000064   Dbug   RW    73     .debug_line         main.o
-    0x00000428   0x00000064   Dbug   RW    77     .debug_line         main.o
-    0x0000048c   0x000000e4   Dbug   RW    97     .debug_line         s3c2440_start_init.o
-    0x00000570   0x000000ec   Dbug   RW   108     .debug_line         s3c2440_uart.o
-    0x0000065c   0x00000110   Dbug   RW   112     .debug_line         s3c2440_uart.o
-    0x0000076c   0x0000003c   Dbug   RW   117     .debug_line         s3c2440_uart.o
-    0x000007a8   0x000000e4   Dbug   RW   129     .debug_line         s3c2440_clk_power.o
-    0x0000088c   0x00000344   Dbug   RW   191     .debug_line         s3c2440_nandflash.o
-    0x00000bd0   0x000000b8   Dbug   RW   218     .debug_line         s3c2440_nandflash.o
-    0x00000c88   0x000000bc   Dbug   RW   223     .debug_line         s3c2440_nandflash.o
-    0x00000d44   0x000000b8   Dbug   RW   228     .debug_line         s3c2440_nandflash.o
-    0x00000dfc   0x000000b8   Dbug   RW   233     .debug_line         s3c2440_nandflash.o
-    0x00000eb4   0x00000118   Dbug   RW   243     .debug_line         s3c2440_mmu.o
-    0x00000fcc   0x000000fc   Dbug   RW   250     .debug_line         mmulib.o
-    0x000010c8   0x00000150   Dbug   RW   263     .debug_line         s3c2440_usb.o
-    0x00001218   0x000003ac   Dbug   RW   267     .debug_line         s3c2440_usb.o
-    0x000015c4   0x00000070   Dbug   RW   274     .debug_line         s3c2440_usb.o
-    0x00001634   0x0000006c   Dbug   RW   280     .debug_line         s3c2440_usb.o
-    0x000016a0   0x00000064   Dbug   RW   284     .debug_line         s3c2440_usb.o
-    0x00001704   0x000000e0   Dbug   RW   303     .debug_line         s3c2440_usb_desc.o
-    0x000017e4   0x00000354   Dbug   RW   307     .debug_line         s3c2440_usb_desc.o
-    0x00001b38   0x000000d8   Dbug   RW   321     .debug_line         s3c2440_usb_scsi.o
-    0x00001c10   0x000000b8   Dbug   RW   333     .debug_line         s3c2440_usb_util.o
-    0x00001cc8   0x000000b0   Dbug   RW   354     .debug_line         s3c2440_ftl.o
-    0x00001d78   0x00000298   Dbug   RW   358     .debug_line         s3c2440_ftl.o
-    0x00002010   0x00000094   Dbug   RW   366     .debug_line         bootloader.o
-    0x000020a4   0x00000204   Dbug   RW   369     .debug_line         bootloader.o
+    0x000000ac   0x00000044   Dbug   RW    17     .debug_line         usb_vect.o
+    0x000000f0   0x0000009c   Dbug   RW    26     .debug_line         main.o
+    0x0000018c   0x0000009c   Dbug   RW    29     .debug_line         main.o
+    0x00000228   0x0000004c   Dbug   RW    34     .debug_line         main.o
+    0x00000274   0x00000058   Dbug   RW    53     .debug_line         main.o
+    0x000002cc   0x00000058   Dbug   RW    63     .debug_line         main.o
+    0x00000324   0x00000050   Dbug   RW    73     .debug_line         main.o
+    0x00000374   0x00000050   Dbug   RW    77     .debug_line         main.o
+    0x000003c4   0x000000c0   Dbug   RW    97     .debug_line         s3c2440_start_init.o
+    0x00000484   0x000000b4   Dbug   RW   108     .debug_line         s3c2440_uart.o
+    0x00000538   0x000000e8   Dbug   RW   112     .debug_line         s3c2440_uart.o
+    0x00000620   0x0000003c   Dbug   RW   117     .debug_line         s3c2440_uart.o
+    0x0000065c   0x000000c0   Dbug   RW   129     .debug_line         s3c2440_clk_power.o
+    0x0000071c   0x0000045c   Dbug   RW   191     .debug_line         s3c2440_nandflash.o
+    0x00000b78   0x00000064   Dbug   RW   233     .debug_line         s3c2440_nandflash.o
+    0x00000bdc   0x00000064   Dbug   RW   238     .debug_line         s3c2440_nandflash.o
+    0x00000c40   0x00000064   Dbug   RW   243     .debug_line         s3c2440_nandflash.o
+    0x00000ca4   0x00000064   Dbug   RW   248     .debug_line         s3c2440_nandflash.o
+    0x00000d08   0x000000f0   Dbug   RW   258     .debug_line         s3c2440_mmu.o
+    0x00000df8   0x000000fc   Dbug   RW   265     .debug_line         mmulib.o
+    0x00000ef4   0x00000118   Dbug   RW   278     .debug_line         s3c2440_usb.o
+    0x0000100c   0x00000378   Dbug   RW   282     .debug_line         s3c2440_usb.o
+    0x00001384   0x00000060   Dbug   RW   289     .debug_line         s3c2440_usb.o
+    0x000013e4   0x00000058   Dbug   RW   295     .debug_line         s3c2440_usb.o
+    0x0000143c   0x00000050   Dbug   RW   299     .debug_line         s3c2440_usb.o
+    0x0000148c   0x000000bc   Dbug   RW   318     .debug_line         s3c2440_usb_desc.o
+    0x00001548   0x00000330   Dbug   RW   322     .debug_line         s3c2440_usb_desc.o
+    0x00001878   0x000000b4   Dbug   RW   336     .debug_line         s3c2440_usb_scsi.o
+    0x0000192c   0x000000b8   Dbug   RW   348     .debug_line         s3c2440_usb_util.o
+    0x000019e4   0x0000008c   Dbug   RW   369     .debug_line         s3c2440_ftl.o
+    0x00001a70   0x000002bc   Dbug   RW   373     .debug_line         s3c2440_ftl.o
+    0x00001d2c   0x0000006c   Dbug   RW   381     .debug_line         bootloader.o
+    0x00001d98   0x000001dc   Dbug   RW   384     .debug_line         bootloader.o
     0x00000000   0x00000034   Dbug   RW    32     .debug_loc          main.o
     0x00000034   0x0000004c   Dbug   RW   100     .debug_loc          s3c2440_start_init.o
     0x00000080   0x00000160   Dbug   RW   115     .debug_loc          s3c2440_uart.o
     0x000001e0   0x00000044   Dbug   RW   132     .debug_loc          s3c2440_clk_power.o
-    0x00000224   0x00000780   Dbug   RW   194     .debug_loc          s3c2440_nandflash.o
-    0x000009a4   0x00000014   Dbug   RW   221     .debug_loc          s3c2440_nandflash.o
-    0x000009b8   0x00000014   Dbug   RW   226     .debug_loc          s3c2440_nandflash.o
-    0x000009cc   0x00000014   Dbug   RW   231     .debug_loc          s3c2440_nandflash.o
-    0x000009e0   0x00000014   Dbug   RW   236     .debug_loc          s3c2440_nandflash.o
-    0x000009f4   0x00000194   Dbug   RW   246     .debug_loc          s3c2440_mmu.o
-    0x00000b88   0x000005cc   Dbug   RW   270     .debug_loc          s3c2440_usb.o
-    0x00001154   0x00000108   Dbug   RW   310     .debug_loc          s3c2440_usb_desc.o
-    0x0000125c   0x00000038   Dbug   RW   324     .debug_loc          s3c2440_usb_scsi.o
-    0x00001294   0x00000070   Dbug   RW   336     .debug_loc          s3c2440_usb_util.o
-    0x00001304   0x000005e0   Dbug   RW   361     .debug_loc          s3c2440_ftl.o
-    0x000018e4   0x00000410   Dbug   RW   372     .debug_loc          bootloader.o
+    0x00000224   0x00000820   Dbug   RW   194     .debug_loc          s3c2440_nandflash.o
+    0x00000a44   0x00000020   Dbug   RW   236     .debug_loc          s3c2440_nandflash.o
+    0x00000a64   0x00000020   Dbug   RW   241     .debug_loc          s3c2440_nandflash.o
+    0x00000a84   0x00000020   Dbug   RW   246     .debug_loc          s3c2440_nandflash.o
+    0x00000aa4   0x00000020   Dbug   RW   251     .debug_loc          s3c2440_nandflash.o
+    0x00000ac4   0x00000194   Dbug   RW   261     .debug_loc          s3c2440_mmu.o
+    0x00000c58   0x000005cc   Dbug   RW   285     .debug_loc          s3c2440_usb.o
+    0x00001224   0x00000108   Dbug   RW   325     .debug_loc          s3c2440_usb_desc.o
+    0x0000132c   0x00000038   Dbug   RW   339     .debug_loc          s3c2440_usb_scsi.o
+    0x00001364   0x00000178   Dbug   RW   351     .debug_loc          s3c2440_usb_util.o
+    0x000014dc   0x00000714   Dbug   RW   376     .debug_loc          s3c2440_ftl.o
+    0x00001bf0   0x00000410   Dbug   RW   387     .debug_loc          bootloader.o
     0x00000000   0x00000fc0   Dbug   RW    20     .debug_macinfo      usb_vect.o
     0x00000fc0   0x00000178   Dbug   RW    28     .debug_macinfo      main.o
     0x00001138   0x00000068   Dbug   RW    37     .debug_macinfo      main.o
-    0x000011a0   0x00000214   Dbug   RW    56     .debug_macinfo      main.o
-    0x000013b4   0x00000120   Dbug   RW    66     .debug_macinfo      main.o
-    0x000014d4   0x000003dc   Dbug   RW    76     .debug_macinfo      main.o
-    0x000018b0   0x00000064   Dbug   RW    80     .debug_macinfo      main.o
-    0x00001914   0x000001a4   Dbug   RW   111     .debug_macinfo      s3c2440_uart.o
-    0x00001ab8   0x000000e8   Dbug   RW   120     .debug_macinfo      s3c2440_uart.o
-    0x00001ba0   0x000001b8   Dbug   RW   266     .debug_macinfo      s3c2440_usb.o
-    0x00001d58   0x0000026c   Dbug   RW   277     .debug_macinfo      s3c2440_usb.o
-    0x00001fc4   0x00000710   Dbug   RW   283     .debug_macinfo      s3c2440_usb.o
-    0x000026d4   0x00001358   Dbug   RW   287     .debug_macinfo      s3c2440_usb.o
-    0x00003a2c   0x000003d8   Dbug   RW   306     .debug_macinfo      s3c2440_usb_desc.o
-    0x00003e04   0x00000238   Dbug   RW   357     .debug_macinfo      s3c2440_ftl.o
-    0x0000403c   0x00000674   Dbug   RW   368     .debug_macinfo      bootloader.o
+    0x000011a0   0x00000210   Dbug   RW    56     .debug_macinfo      main.o
+    0x000013b0   0x00000120   Dbug   RW    66     .debug_macinfo      main.o
+    0x000014d0   0x00000410   Dbug   RW    76     .debug_macinfo      main.o
+    0x000018e0   0x00000090   Dbug   RW    80     .debug_macinfo      main.o
+    0x00001970   0x000001a4   Dbug   RW   111     .debug_macinfo      s3c2440_uart.o
+    0x00001b14   0x000000e8   Dbug   RW   120     .debug_macinfo      s3c2440_uart.o
+    0x00001bfc   0x000001b8   Dbug   RW   281     .debug_macinfo      s3c2440_usb.o
+    0x00001db4   0x00000288   Dbug   RW   292     .debug_macinfo      s3c2440_usb.o
+    0x0000203c   0x00000710   Dbug   RW   298     .debug_macinfo      s3c2440_usb.o
+    0x0000274c   0x00001358   Dbug   RW   302     .debug_macinfo      s3c2440_usb.o
+    0x00003aa4   0x000003d8   Dbug   RW   321     .debug_macinfo      s3c2440_usb_desc.o
+    0x00003e7c   0x00000238   Dbug   RW   372     .debug_macinfo      s3c2440_ftl.o
+    0x000040b4   0x00000674   Dbug   RW   383     .debug_macinfo      bootloader.o
     0x00000000   0x00000290   Dbug   RW    19     .debug_pubnames     usb_vect.o
     0x00000290   0x0000001c   Dbug   RW    31     .debug_pubnames     main.o
     0x000002ac   0x000000c4   Dbug   RW    55     .debug_pubnames     main.o
@@ -314,31 +319,36 @@ Memory Map of the image
     0x00000820   0x00000024   Dbug   RW   208     .debug_pubnames     s3c2440_nandflash.o
     0x00000844   0x00000028   Dbug   RW   211     .debug_pubnames     s3c2440_nandflash.o
     0x0000086c   0x00000028   Dbug   RW   214     .debug_pubnames     s3c2440_nandflash.o
-    0x00000894   0x00000024   Dbug   RW   217     .debug_pubnames     s3c2440_nandflash.o
-    0x000008b8   0x00000024   Dbug   RW   220     .debug_pubnames     s3c2440_nandflash.o
-    0x000008dc   0x00000028   Dbug   RW   225     .debug_pubnames     s3c2440_nandflash.o
-    0x00000904   0x00000028   Dbug   RW   230     .debug_pubnames     s3c2440_nandflash.o
-    0x0000092c   0x00000024   Dbug   RW   235     .debug_pubnames     s3c2440_nandflash.o
-    0x00000950   0x00000048   Dbug   RW   245     .debug_pubnames     s3c2440_mmu.o
-    0x00000998   0x00000030   Dbug   RW   256     .debug_pubnames     s3c2440_usb.o
-    0x000009c8   0x00000034   Dbug   RW   259     .debug_pubnames     s3c2440_usb.o
-    0x000009fc   0x0000002c   Dbug   RW   262     .debug_pubnames     s3c2440_usb.o
-    0x00000a28   0x00000034   Dbug   RW   265     .debug_pubnames     s3c2440_usb.o
-    0x00000a5c   0x0000016c   Dbug   RW   269     .debug_pubnames     s3c2440_usb.o
-    0x00000bc8   0x000000ac   Dbug   RW   279     .debug_pubnames     s3c2440_usb.o
-    0x00000c74   0x00000028   Dbug   RW   290     .debug_pubnames     s3c2440_usb.o
-    0x00000c9c   0x00000168   Dbug   RW   305     .debug_pubnames     s3c2440_usb_desc.o
-    0x00000e04   0x00000064   Dbug   RW   309     .debug_pubnames     s3c2440_usb_desc.o
-    0x00000e68   0x000000e8   Dbug   RW   313     .debug_pubnames     s3c2440_usb_desc.o
-    0x00000f50   0x000000ec   Dbug   RW   315     .debug_pubnames     s3c2440_usb_desc.o
-    0x0000103c   0x00000104   Dbug   RW   323     .debug_pubnames     s3c2440_usb_scsi.o
-    0x00001140   0x0000008c   Dbug   RW   327     .debug_pubnames     s3c2440_usb_scsi.o
-    0x000011cc   0x00000024   Dbug   RW   335     .debug_pubnames     s3c2440_usb_util.o
-    0x000011f0   0x00000028   Dbug   RW   339     .debug_pubnames     s3c2440_usb_util.o
-    0x00001218   0x00000038   Dbug   RW   356     .debug_pubnames     s3c2440_ftl.o
-    0x00001250   0x00000138   Dbug   RW   360     .debug_pubnames     s3c2440_ftl.o
-    0x00001388   0x0000013c   Dbug   RW   364     .debug_pubnames     s3c2440_ftl.o
-    0x000014c4   0x00000100   Dbug   RW   371     .debug_pubnames     bootloader.o
+    0x00000894   0x00000028   Dbug   RW   217     .debug_pubnames     s3c2440_nandflash.o
+    0x000008bc   0x00000024   Dbug   RW   220     .debug_pubnames     s3c2440_nandflash.o
+    0x000008e0   0x0000002c   Dbug   RW   223     .debug_pubnames     s3c2440_nandflash.o
+    0x0000090c   0x0000002c   Dbug   RW   226     .debug_pubnames     s3c2440_nandflash.o
+    0x00000938   0x0000002c   Dbug   RW   229     .debug_pubnames     s3c2440_nandflash.o
+    0x00000964   0x0000002c   Dbug   RW   232     .debug_pubnames     s3c2440_nandflash.o
+    0x00000990   0x00000024   Dbug   RW   235     .debug_pubnames     s3c2440_nandflash.o
+    0x000009b4   0x00000028   Dbug   RW   240     .debug_pubnames     s3c2440_nandflash.o
+    0x000009dc   0x00000028   Dbug   RW   245     .debug_pubnames     s3c2440_nandflash.o
+    0x00000a04   0x00000024   Dbug   RW   250     .debug_pubnames     s3c2440_nandflash.o
+    0x00000a28   0x00000048   Dbug   RW   260     .debug_pubnames     s3c2440_mmu.o
+    0x00000a70   0x00000030   Dbug   RW   271     .debug_pubnames     s3c2440_usb.o
+    0x00000aa0   0x00000034   Dbug   RW   274     .debug_pubnames     s3c2440_usb.o
+    0x00000ad4   0x0000002c   Dbug   RW   277     .debug_pubnames     s3c2440_usb.o
+    0x00000b00   0x00000034   Dbug   RW   280     .debug_pubnames     s3c2440_usb.o
+    0x00000b34   0x0000016c   Dbug   RW   284     .debug_pubnames     s3c2440_usb.o
+    0x00000ca0   0x000000ac   Dbug   RW   294     .debug_pubnames     s3c2440_usb.o
+    0x00000d4c   0x00000028   Dbug   RW   305     .debug_pubnames     s3c2440_usb.o
+    0x00000d74   0x00000168   Dbug   RW   320     .debug_pubnames     s3c2440_usb_desc.o
+    0x00000edc   0x00000064   Dbug   RW   324     .debug_pubnames     s3c2440_usb_desc.o
+    0x00000f40   0x000000e8   Dbug   RW   328     .debug_pubnames     s3c2440_usb_desc.o
+    0x00001028   0x000000ec   Dbug   RW   330     .debug_pubnames     s3c2440_usb_desc.o
+    0x00001114   0x00000104   Dbug   RW   338     .debug_pubnames     s3c2440_usb_scsi.o
+    0x00001218   0x0000008c   Dbug   RW   342     .debug_pubnames     s3c2440_usb_scsi.o
+    0x000012a4   0x00000040   Dbug   RW   350     .debug_pubnames     s3c2440_usb_util.o
+    0x000012e4   0x00000028   Dbug   RW   354     .debug_pubnames     s3c2440_usb_util.o
+    0x0000130c   0x00000038   Dbug   RW   371     .debug_pubnames     s3c2440_ftl.o
+    0x00001344   0x0000014c   Dbug   RW   375     .debug_pubnames     s3c2440_ftl.o
+    0x00001490   0x0000013c   Dbug   RW   379     .debug_pubnames     s3c2440_ftl.o
+    0x000015cc   0x00000100   Dbug   RW   386     .debug_pubnames     bootloader.o
 
 
 ================================================================================
@@ -348,7 +358,7 @@ Image component sizes
 
       Code    RO Data    RW Data    ZI Data      Debug   
 
-     13516        252          1       8769      77792   Object Totals
+     14792        252          1       8777      79588   Object Totals
      14548        475          0         96       4960   Library Totals
 
 ================================================================================
@@ -356,13 +366,13 @@ Image component sizes
 
       Code    RO Data    RW Data    ZI Data      Debug   
 
-     28064        727          1       8865      82752   Grand Totals
+     29340        727          1       8873      84548   Grand Totals
 
 ================================================================================
 
-    Total RO  Size(Code + RO Data)                28791 (  28.12kB)
-    Total RW  Size(RW Data + ZI Data)              8866 (   8.66kB)
-    Total ROM Size(Code + RO Data + RW Data)      28792 (  28.12kB)
+    Total RO  Size(Code + RO Data)                30067 (  29.36kB)
+    Total RW  Size(RW Data + ZI Data)              8874 (   8.67kB)
+    Total ROM Size(Code + RO Data + RW Data)      30068 (  29.36kB)
 
 ================================================================================
 

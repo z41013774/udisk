@@ -1,6 +1,8 @@
 #ifndef _USB_UTIL_H__
 #define _USB_UTIL_H__
 #include "s3c2440_uart.h"
+#define CALCSIZE(a,b)	((a)/(b))
+
 #define USB_TRACE_CMD				0x00000002
 #define USB_TRACE_ALLOCATE			0x00000004
 #define USB_TRACE_SCAN				0x00000008
@@ -22,6 +24,7 @@
 extern uint8_t usb_trace_mask ;
 #define TOUT(p) dbg_printf p
 void usb_mem_copy(const uint8_t *src, uint8_t *dest,uint32_t size);
+void usb_fill_buf(uint8_t *buf,uint32_t val,uint32_t size);
 #define T(mask, p) do { if ((mask) & (usb_trace_mask | USB_TRACE_ALWAYS)) TOUT(p); } while (0)
 
 #endif

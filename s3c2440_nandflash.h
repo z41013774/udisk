@@ -4,12 +4,12 @@
 #define DISABLE_CHIP_SEL	1
 #define ENABLE_CHIP_SEL		0
 #define DISABLE_FLASH_CTL	0
-#define ENABLE_FLASH_CTL	1
-#define INIT_ECC			1
-#define MAIN_ECC_LOCKED		1
-#define MAIN_ECC_UNLOCKED	0
-#define SPARE_ECC_LOCKED	1
-#define SPARE_ECC_UNLOCKED	0
+#define ENABLE_FLASH_CTL	(1<<0)
+#define INIT_ECC			(1<<4)
+#define MAIN_ECC_LOCKED		(1<<5)
+//#define MAIN_ECC_UNLOCKED	(0<<5)
+#define SPARE_ECC_LOCKED	(1<<6)
+//#define SPARE_ECC_UNLOCKED	(0<<6)
 /*FLASH STATUS*/
 #define RB_DETECTED			1
 #define FLASH_MEM_BUSY		1
@@ -19,7 +19,9 @@
 #define NAND_STATUS_TRUE_READY	0x20
 #define NAND_STATUS_READY		0x40
 #define NAND_STATUS_WP			0x80
-/**/
+
+/*5% bad block*/
+#define MAX_BAD_BLOCK_NUM		51
 #define CMD_ERASE			0
 #define CMD_READ			1
 #define CMD_PROGRAM			2
@@ -102,34 +104,78 @@ void samsung_flash_timing(nand_timing_t * samsung_timing);
 
 void flash_test(void);
 
-__inline void nand_chip_sel() 
+__inline void nand_chip_sel(S3C2440_NAND  * const nand) 
 { 
-	S3C2440_NAND  * const nand = S3C2410_GetBase_NAND(); 
+	//S3C2440_NAND  * const nand = S3C2410_GetBase_NAND(); 
+	if(!nand)
+		return;
 	nand->NFCONT &= ~(DISABLE_CHIP_SEL<<1);
 	
 }
-__inline void nand_chip_disel() 
+__inline void nand_reset_ecc(S3C2440_NAND  * const nand)
+{
+	if(!nand)
+		return;
+	nand->NFCONF |= INIT_ECC; 
+}
+__inline void nand_chip_disel(S3C2440_NAND  * const nand) 
 { 
-	S3C2440_NAND  * const nand = S3C2410_GetBase_NAND(); 
+	//S3C2440_NAND  * const nand = S3C2410_GetBase_NAND(); 
+	if(!nand)
+		return;
 	nand->NFCONT |= (DISABLE_CHIP_SEL<<1);
 	
 }
 
-__inline void nand_detect_rb(void)
+__inline void nand_detect_rb(S3C2440_NAND  * const nand)
 {
-	S3C2440_NAND  * const nand = S3C2410_GetBase_NAND(); 
+	//S3C2440_NAND  * const nand = S3C2410_GetBase_NAND(); 
+	if(!nand)
+		return;
 	while(!(nand->NFSTAT & (RB_DETECTED<<2)))
 			;
 }
-__inline void nand_clear_rb(void)
+__inline void nand_clear_rb(S3C2440_NAND  * const nand)
 {
-	S3C2440_NAND  * const nand = S3C2410_GetBase_NAND(); 
+	//S3C2440_NAND  * const nand = S3C2410_GetBase_NAND(); 
+	if(!nand)
+		return;
 	nand->NFSTAT |= (RB_DETECTED << 2);
+}
+__inline void nand_main_ecc_lock(S3C2440_NAND  * const nand)
+{
+	//S3C2440_NAND  * const nand = S3C2410_GetBase_NAND();
+	if(!nand)
+		return;
+	nand->NFCONT |= MAIN_ECC_LOCKED;
+
+}
+__inline void nand_main_ecc_unlock(S3C2440_NAND  * const nand)
+{
+	//S3C2440_NAND  * const nand = S3C2410_GetBase_NAND();
+	if(!nand)
+		return;
+	nand->NFCONT &= ~MAIN_ECC_LOCKED;
+}
+__inline void nand_spare_ecc_lock(S3C2440_NAND  * const nand)
+{
+	//S3C2440_NAND  * const nand = S3C2410_GetBase_NAND();
+	if(!nand)
+		return;
+	nand->NFCONT |= SPARE_ECC_LOCKED;
+
+}
+__inline void nand_spare_ecc_unlock(S3C2440_NAND  * const nand)
+{
+	//S3C2440_NAND  * const nand = S3C2410_GetBase_NAND();
+	if(!nand)
+		return;
+	nand->NFCONT &= ~SPARE_ECC_LOCKED;
 }
 extern uint8_t r_buf[PAGE_SIZE];
 extern uint8_t w_buf[PAGE_SIZE];
 extern uint8_t r_oob_buf[12];
 extern uint8_t w_oob_buf[12];
 extern  flash_info_t flash_info;
-extern uint8_t nand_bbt[51];
+extern uint8_t nand_bbt[MAX_BAD_BLOCK_NUM];
 #endif

@@ -25,8 +25,7 @@ void dump_usb_reg()
 	USB_TRACE("out_csr1_addr 0x%x\r\n",&usb_device->OUT_CSR1_REG);
 	USB_TRACE("out_csr2_addr 0x%x\r\n",&usb_device->OUT_CSR2_REG);
 	USB_TRACE("out_fifo_cnt1_addr 0x%x\r\n",&usb_device->OUT_FIFO_CNT1_REG);
-	USB_TRACE("out_fifo_cnt2_addr 0x%x\r\n",&usb_device->OUT_FIFO_CNT2_REG);
-	
+	USB_TRACE("out_fifo_cnt2_addr 0x%x\r\n",&usb_device->OUT_FIFO_CNT2_REG);	
 
 }
 

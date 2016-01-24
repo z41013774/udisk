@@ -1,24 +1,25 @@
 #include "s3c2440_ftl.h"
 #include "s3c2440_usb_util.h"
 
+/*---------------------------------------------------
+|code data bss seg	|	block info	|	l2p			|
+|					|				|				|
+|	0x30000000		|	0x300FF000	|	0x30100000	|
+|					|				|				|
+|	0x30			|	0x30100000	|	0x30140000	|
+----------------------------------------------------*/
 #define L2P_ADDR		0x30100000
 #define L2P_SIZE		BLOCK_NUM*PAGE_NUM*4
 #define BLOCK_INFO_SIZE	BLOCK_NUM*4
 #define BLOCK_INFO_ADDR L2P_ADDR-BLOCK_INFO_SIZE
 volatile uint32_t serial_number;
 volatile uint8_t need_wait;
-/*DDR allocate*/
-/*code data bss seg*/
-/*30000000------30100000*/
-/*block info*/
-/*300FF000------30100000*/
-/*L2P*/
-/*30100000------30140000*/
-/*bad blk*/
-/**************************************
-*1 scan device
-*2 
-***************************************/
+
+/*-------------------------------------------------
+1 scan device
+2 sort
+3 recovery l2p & blk info and find current use block and page
+--------------------------------------------------*/
 volatile block_info_t *blk_info;
 volatile uint32_t *usb_l2p;
 usb_dev_t dev;
@@ -88,7 +89,7 @@ void scan_storage(void)
 
 	max_block_num = 0;
 	min_block_num = block_num;
-	for(block=0;block >=0;block--)
+	for(block=3;block >=0;block--)
 	{
 		for(page=flash_info.page_num;page>=0;page--)
 		{
@@ -114,10 +115,10 @@ void scan_storage(void)
 							else
 							{
 								/*page == page num*/
+								/*set contion for get vaild block*/
 								dev.allocation_page = flash_info.page_num;
 								dev.finder_block = tag.finder_block;
-								get_availd_block();
-								
+								//get_availd_block();								
 							}
 							finder_allocating_page = 1;
 							T(USB_TRACE_SCAN,("we are using block 0x%x,page 0x%x\r\n",dev.allocation_block,dev.allocation_page));
@@ -136,7 +137,7 @@ void scan_storage(void)
 			}				
 		}
 	}
-	if(dev.allocation_block == 0xffff)
+	if(dev.allocation_block == INVAILD_BLOCK_NUMBER)
 	{
 		/*only one time*/
 		dev.allocation_block = dev.start_block;
@@ -169,10 +170,10 @@ uint32_t usb_find_block_for_allocation()
 {
 	return dev.finder_block;
 }
-/*****************************************************
+/*----------------------------------------------------
 1 search block ,the erase cnt of block should be max .
 2 erase cnt 70% + 30% dirty cnt
-/*****************************************************/
+-----------------------------------------------------*/
 #define MAXERASECNT		3000
 #define MAXDIRTYCNT		64
 #define MINERASECNT		0
@@ -206,6 +207,7 @@ static uint32_t usb_find_block_grabage_collection()
 			}
 		}			
 	}
+	blk_info[block_num].block_state = BLOCK_STATE_COLLECTING;
 	T(USB_TRACE_GC_DETAIL,("find block 0x%x\r\n",block_num));
 	return block_num;
 
@@ -225,12 +227,12 @@ static void usb_check_grabage_collection()
  	}
 	
 }
-/*-------------------------------------------------
+/*-------------------------------------------------------
 1 checking ppn in l2p table should be equ to current ppn
   (block<<page_shift+page)
 2 lpn in flash oob area
 3 do gc,one time,one page
---------------------------------------------------*/
+--------------------------------------------------------*/
 static uint32_t usb_grabage_collection_block(uint32_t block)
 {
 	uint32_t page;
@@ -274,59 +276,83 @@ static uint32_t usb_grabage_collection_block(uint32_t block)
 		{
 	
 			T(USB_TRACE_GC,("gc done ,but erase %d block fail\r\n",flash_addr_0.block));
-		
 			update_bbt(flash_addr_0.block);
 			/*used reserved block*/
 		}
 
 	}
-	
 	if(dev.allocation_page == flash_info.page_num)
 	{
-		//need_wait = 1;
+		
 		get_availd_block();
+	}
 	
-	}
-	else
-	{
-		//need_wait = 0;
-	}
 }
 void create_bbt(void)
 {
 	int page;
 	uint32_t block;
 	nand_flash_addr_t flash_addr;
-	flash_addr.block = BBT_BLOCK;
-	
-	for(page = flash_info.page_num; page>=0; page--)
+	for(block = BBT_BLOCK0;block<(BBT_BLOCK1+1);block++)
 	{
-		if(flash_info.flash_op->nand_read)
+		for(page = flash_info.page_num; page>=0; page--)
 		{
-			flash_info.flash_op->nand_read(&flash_addr,r_buf);
-			usb_mem_copy(r_buf,(uint8_t *)&nand_bbt,51);
-			if(((nand_bbt[1]<<8)|nand_bbt[0]) != 0xFFFF)
+			if(flash_info.flash_op->nand_read)
 			{
-				T(USB_TRACE_ALWAYS,("find page we will write\r\n"));
-				break;
+				flash_addr.block = block;
+				flash_addr.page = page;
+				flash_info.flash_op->nand_read(&flash_addr,r_buf);
+				usb_mem_copy(r_buf,(uint8_t *)&nand_bbt,sizeof(nand_bbt));
+				if(((nand_bbt[1]<<8)|nand_bbt[0]) != 0xFFFF)
+				{
+					dev.bad_table_block = flash_addr.block;
+					dev.bad_table_page = page;
+					T(USB_TRACE_ALWAYS,("find page we will write\r\n"));
+					break;
+				}
 			}
+	
 		}
 
-	}
+	}	
 	
 }
-void update_bbt(uint32_t block_num)
+static void update_bbt(uint32_t block_num)
 {
-
+	uint16_t block;
+	uint8_t cnt;
+	nand_flash_addr_t flash_addr;
+	tag_t tag;
+	dev.bad_table_page++;
+	flash_addr.block = dev.bad_table_block;
+	flash_addr.page = dev.bad_table_page;
+	for(cnt = 0;cnt< CALCSIZE(sizeof(nand_bbt),sizeof(nand_bbt[0]));)
+	{
+		block |= nand_bbt[cnt++];
+		block |= (nand_bbt[cnt++]<<8);
+		if(block == INVAILD_BLOCK_NUMBER)
+		{
+			nand_bbt[cnt-2] = (block_num & 0xff);
+			nand_bbt[cnt-1] = (block_num >>8)&0xff;
+			break;
+		}
+			
+	}
+	usb_mem_copy((uint8_t *)&nand_bbt,w_buf,sizeof(nand_bbt));
+	if(flash_info.flash_op->nand_program)
+	{
+		/*here,tag record time*/
+		flash_info.flash_op->nand_program(&flash_addr,w_buf,&tag);
+	}
 }
-/*************************************************
+/*---------------------------------------------------
 1 read data of page0~pagen-1 of current block in r_buf.
 2 find finder_block to instead of allocation_block
 3 do gc, allocate a block to finder_block
 4 program data of r_buf to allocation_block
 5 update l2p table
 6 update blocknum to btt
-**************************************************/
+----------------------------------------------------*/
 static void usb_retire_block()
 {
 	uint16_t block,page;
@@ -341,8 +367,6 @@ static void usb_retire_block()
 	/*in order to keep state machine*/
 	dev.allocation_page = flash_info.page_num;
 	get_availd_block();
-	/*get a block by gc.*/
-	//usb_check_grabage_collection();
 
 	for(page=0;page < tmp_page;page++)
 	{
@@ -359,15 +383,12 @@ static void usb_retire_block()
 			flash_addr.page = dev.allocation_page;
 			if(flash_addr.page == 0)
 			{
-				tag.serial_number = serial_number++;
+				tag.serial_number = serial_number;
 			}
 			flash_info.flash_op->nand_program(&flash_addr,w_buf,&tag);
 			usb_l2p[tag.lpn] = ((dev.allocation_block<<flash_info.page_shift)|dev.allocation_page);
 			dev.allocation_page++;
-
-			/**if dev.allocation_page == page_num*****/
-			/*how can i do?*/
-			/**/
+			/*here ,bad contion,dev.allocation == flash_info.page_num*/
 		}
 		
 	}
@@ -397,11 +418,13 @@ void ftl_init(void)
 	uint32_t lpn;
 	usb_l2p = (uint32_t *)L2P_ADDR;
 	blk_info = (block_info_t *)BLOCK_INFO_ADDR;
-	dev.allocation_page = 0;
-	dev.allocation_block = 0xffff;
+	
 	dev.start_block = 10;
 	dev.end_block = BLOCK_NUM;
 	dev.nreserved_blocks = 5;
+	dev.allocation_page = 0;
+	dev.allocation_block = INVAILD_BLOCK_NUMBER;
+	dev.finder_block = INVAILD_BLOCK_NUMBER;
 	need_wait = 0;
 	for(block = dev.start_block;block < dev.end_block; block++)
 	{
@@ -411,24 +434,30 @@ void ftl_init(void)
 	}
 	for(lpn = 0 ;lpn < BLOCK_NUM*PAGE_NUM;lpn++)
 	{
-		usb_l2p[lpn] = 0xffffffff;
+		usb_l2p[lpn] = INVAILD_PPN;
 	}
 	serial_number = 20;
 }
 
-/*****************************************************************
+/*---------------------------------------------------------------
   1 get a free block by grabage collection.if we use allocating_block,so data 
    of gc will be write this block.
   2 program w_data to allocation_block
   3 updata l2p table
-******************************************************************/
+ ---------------------------------------------------------------*/
 uint8_t usb_write(uint32_t lpn,uint8_t *buf)
 {
 	uint32_t block;
 	nand_flash_addr_t flash_addr;
 	tag_t tag;
-
-	
+	/*----------------------------------------
+	1 after scan dev
+	2 after program last page.
+	------------------------------------------*/
+	if(dev.allocation_page == flash_info.page_num)
+	{
+		get_availd_block();
+	}
 	/*after gc done*/
 	/*here ,dev.finder_block can't equ to INVAILD_BLOCK_NUMBER*/
 	tag.serial_number = serial_number;
@@ -459,20 +488,57 @@ uint8_t usb_write(uint32_t lpn,uint8_t *buf)
 		usb_l2p[lpn]=((dev.allocation_block<<flash_info.page_shift)|dev.allocation_page);
 	}
 	dev.allocation_page++;
-	if(dev.allocation_page == flash_info.page_num)
-	{
-		get_availd_block();
-	}
+	
 	return SUCCESS;	
 	
+}
+void copy_vaild_data(nand_flash_addr_t *flash_addr)
+{
+	uint16_t page;
+	uint32_t block;
+	tag_t tag;
+	nand_flash_addr_t curr_flash_addr;
+	page = flash_addr->page;
+	for(page = 0;page<flash_addr->page;page++)
+	{
+		if(flash_info.flash_op->nand_read)
+			flash_info.flash_op->nand_read(flash_addr,r_buf);
+		if(flash_info.flash_op->nand_read_oob)
+			flash_info.flash_op->nand_read_oob(flash_addr,&tag);
+		if(flash_info.flash_op->nand_program)
+		{
+			usb_mem_copy(r_buf,w_buf,flash_info.page_size);
+			curr_flash_addr.block = dev.allocation_block;
+			curr_flash_addr.page = dev.allocation_page;
+			if(curr_flash_addr.page == 0)
+			{
+				tag.serial_number = serial_number;
+			}
+			flash_info.flash_op->nand_program(&curr_flash_addr,w_buf,&tag);
+			usb_l2p[tag.lpn] = ((dev.allocation_block<<flash_info.page_shift)|dev.allocation_page);
+			dev.allocation_page++;
+			get_availd_block();
+			
+		}
+	}
+	update_bbt(flash_addr->block);
 }
 void usb_read(uint32_t lpn,uint8_t *buf)
 {
 	uint32_t ppn;
+	uint8_t ret;
 	nand_flash_addr_t flash_addr;
 	ppn = usb_l2p[lpn];
 	flash_addr.block = (ppn >> flash_info.page_shift);
 	flash_addr.page = (ppn & 0x3f);
 	if(flash_info.flash_op->nand_read)
-		flash_info.flash_op->nand_read(&flash_addr,r_buf);
+	{
+		ret = flash_info.flash_op->nand_read(&flash_addr,r_buf);
+		if(!ret)
+		{
+			T(USB_TRACE_ALWAYS,("read block %d page %d \r\n",flash_addr.block,flash_addr.page));
+			//usb_retire_block();
+			copy_vaild_data(&flash_addr);
+		}
+	}		
 }

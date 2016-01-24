@@ -8,7 +8,9 @@
 /*4 lba per lpn */
 #define INVAILD_SERIAL_NUMBER		0xFFFFFFFF
 #define INVAILD_BLOCK_NUMBER		0xFFFF
-#define BBT_BLOCK					0x9
+#define INVAILD_PPN					0xFFFFFFFF
+#define BBT_BLOCK0					0x8
+#define BBT_BLOCK1					0x9
 typedef enum {
 	BLOCK_STATE_UNKNOWN = 0,
 
@@ -43,6 +45,8 @@ typedef struct
 	 uint32_t erased_block;
 	 uint32_t start_block;
 	 uint32_t end_block;
+	 uint32_t bad_table_block;
+	 uint32_t bad_table_page;
 	 uint32_t nreserved_blocks;
 }usb_dev_t;
 
@@ -55,7 +59,7 @@ static uint32_t usb_find_block_for_allocation(void);
 static uint32_t usb_grabage_collection_block(uint32_t block);
 block_info_t *get_block_info(uint32_t block);
 static void insertion_sort(block_index_t *block_index,uint16_t block_num);
-void update_bbt(uint32_t block_num);
+static void update_bbt(uint32_t block_num);
 static void get_availd_block(void);
 
 extern volatile block_info_t *blk_info;

@@ -1,8 +1,8 @@
 #include "s3c2440_usb_scsi.h"
 #include "s3c2440_usb.h"
 #include "s3c2440_error.h"
+#include "s3c2440_usb_util.h"
 
-#define CALCSIZE(a,b)	((a)/(b))
 /*refer to scsi primary commands -3(spc-3)*/
 const uint8_t scsi_inquiry[RESP_INQURIY_COUNT]= 
 { 

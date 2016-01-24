@@ -15,7 +15,7 @@ date   : 2015-09-09
 #include "s3c2440_error.h"
 
 #define TRANS_PACKET_CNT_PER	8
-#define PACKET_SEIZE_PER		512
+#define PACKET_SIZE_PER		512
 
 volatile uint8_t 	host_recv_flag = 0;
 volatile uint8_t	host_trans_flag = 0;
@@ -26,16 +26,16 @@ volatile uint32_t	sec_cnt;
 volatile uint8_t 	buckonly ;
  usb_cbw_t	usb_cbw;
  usb_csw_t  usb_csw;
-  void clear_ep3_out_pkt_rdy(void)
-  {
-	  S3C24X0_USB_DEVICE * const usb_device = S3C24X0_GetBase_USB_DEVICE();
-	  usb_device->OUT_CSR1_REG &= (~EPO_WR_BITS & (~(1<<0)));
-  }
-  void clear_ep3_sent_stall(void)
- {
-	 S3C24X0_USB_DEVICE * const usb_device = S3C24X0_GetBase_USB_DEVICE();
-	 usb_device->OUT_CSR1_REG &= (~EPO_WR_BITS & (~EPO_SENT_STALL));
- }
+void clear_ep3_out_pkt_rdy(void)
+{
+  S3C24X0_USB_DEVICE * const usb_device = S3C24X0_GetBase_USB_DEVICE();
+  usb_device->OUT_CSR1_REG &= (~EPO_WR_BITS & (~(1<<0)));
+}
+void clear_ep3_sent_stall(void)
+{
+ S3C24X0_USB_DEVICE * const usb_device = S3C24X0_GetBase_USB_DEVICE();
+ usb_device->OUT_CSR1_REG &= (~EPO_WR_BITS & (~EPO_SENT_STALL));
+}
 
 void __irq usb_isr(void)
 {
@@ -107,6 +107,7 @@ void usb_buckonly_cmd()
 	uint8_t cnt;
 	uint32_t data_len;
 	uint8_t cbw[CBW_SIZE];
+	#if 1
 	S3C24X0_USB_DEVICE * const usb_device = S3C24X0_GetBase_USB_DEVICE();
 	/*select ep3*/
 	usb_device->INDEX_REG = ENDPOINT3;
@@ -116,13 +117,15 @@ void usb_buckonly_cmd()
 	{
 		cbw[cnt] = usb_device->fifo[ENDPOINT3].EP_FIFO_REG;
 	}
+	#endif
+	//usb_get_fifo((uint8_t *)&cbw,CBW_SIZE);
 	usb_mem_copy(cbw,(uint8_t *)&usb_cbw,CBW_SIZE);
 	data_len = (usb_cbw.dCBWDataTransferLength[3]<<24)| \
 			   (usb_cbw.dCBWDataTransferLength[2]<<16)| \
 			   (usb_cbw.dCBWDataTransferLength[1]<<8)| \
 			   (usb_cbw.dCBWDataTransferLength[0]);
 	/*calculate sec cnt*/
-	if((data_len > 0)&&(data_len <= PACKET_SEIZE_PER))
+	if((data_len > 0)&&(data_len <= PACKET_SIZE_PER))
 	{
 		sec_cnt = 1;
 	}
@@ -132,8 +135,8 @@ void usb_buckonly_cmd()
 	}
 	else
 	{
-		sec_cnt = (data_len / PACKET_SEIZE_PER);
-		if(data_len % PACKET_SEIZE_PER)
+		sec_cnt = (data_len / PACKET_SIZE_PER);
+		if(data_len % PACKET_SIZE_PER)
 			sec_cnt ++;
 	}
 	if(((usb_cbw.CBWCB[0] == 0x2a)||(usb_cbw.CBWCB[0] == 0x28))&&(sec_cnt))
@@ -187,7 +190,7 @@ void usb_buckonly_cmd()
 			break;
 			
 	}
-	USB_TRACE("buckonly out cmd 0x%2x\r\n",usb_cbw.CBWCB[0]);
+	//USB_TRACE("buckonly out cmd 0x%2x\r\n",usb_cbw.CBWCB[0]);
 
 }
 void usb_process_cmd()
@@ -199,7 +202,7 @@ void usb_process_cmd()
 	if(usb_device->OUT_CSR1_REG & OUT_OUT_PKT_RDY)
 	{
 		usb_buckonly_cmd();
-		USB_TRACE("scan cmd done\r\n");
+		//USB_TRACE("scan cmd done\r\n");
 		clear_ep3_out_pkt_rdy();
 	}
 	else if(usb_device->OUT_CSR1_REG & EPO_SENT_STALL)
@@ -218,11 +221,12 @@ static void usb_get_one_sector(uint8_t *host_data)
 	S3C24X0_USB_DEVICE * const usb_device = S3C24X0_GetBase_USB_DEVICE();
 	usb_device->INDEX_REG = ENDPOINT3;
 
-	while(recv_data_cnt < PACKET_SEIZE_PER)
+	while(recv_data_cnt < PACKET_SIZE_PER)
 	{
 		while(!host_trans_flag)
 			;
 		host_trans_flag = 0;
+		#if 1
 		if(usb_device->OUT_CSR1_REG & OUT_OUT_PKT_RDY)
 		{
 			fifo_cnt = usb_device->OUT_FIFO_CNT1_REG;
@@ -233,6 +237,9 @@ static void usb_get_one_sector(uint8_t *host_data)
 			}
 			clear_ep3_out_pkt_rdy();
 		}
+		#endif
+		//usb_get_fifo((uint8_t *)&host_data[recv_data_cnt * ENDPOINT3_SIZE],ENDPOINT3_SIZE);
+		//recv_data_cnt++;
 	}	
 
 }
@@ -241,10 +248,11 @@ void usb_buckonly_out(void)
 		
 	uint32_t lpn;
 	uint32_t offset;
-	uint8_t host_data[PACKET_SEIZE_PER];
+	uint8_t host_data[PACKET_SIZE_PER];
 	uint32_t trans_sec_cnt =0;
 	uint32_t rev_data_len = 0;
-	 
+
+	usb_fill_buf(w_buf,0xFFFFFFFF,PAGE_SIZE);
 	while(sec_cnt != trans_sec_cnt)
 	{
 		/*512byte per*/		
@@ -252,19 +260,19 @@ void usb_buckonly_out(void)
 		
 		/*record transmitted  sec cnt*/
 		trans_sec_cnt++;
-		/****************************************************************
-		lba0 sects 4 ,align and program.
-		sec0 sec1 sec2 sec3
-		lba0 sect1,2,3,unaligned and program. remain data set FFFF.
-		sec0,FFFF,FFFF,FFF or sec0 sec1 FFFF FFFF
-		lba1 sects 4 data will be program in two page.
-		FFFF sec1 sec2 sec3,sec4 FFFF FFFF FFFF
-		lba1 sect 1 unallgned and program ,remain data set FFFF
-		FFFF sec0 FFFF FFFF
-		*****************************************************************/
+		/*-------------------------------------------------------------
+		1 lba0 sects 4 ,align and program.
+		   sec0 sec1 sec2 sec3
+		2 lba0 sect1,2,3,unaligned and program. remain data set FFFF.
+		   sec0,FFFF,FFFF,FFF or sec0 sec1 FFFF FFFF
+		3 lba1 sects 4 data will be program in two page.
+		   FFFF sec1 sec2 sec3,sec4 FFFF FFFF FFFF
+		4 lba1 sect 1 unallgned and program ,remain data set FFFF
+		   FFFF sec0 FFFF FFFF
+		---------------------------------------------------------------*/
 		offset = (lba & 0x3);
 		rev_data_len = offset;
-		usb_mem_copy((uint8_t *)&host_data, (uint8_t *)&w_buf[rev_data_len*PACKET_SEIZE_PER],PACKET_SEIZE_PER);
+		usb_mem_copy((uint8_t *)&host_data, (uint8_t *)&w_buf[rev_data_len*PACKET_SIZE_PER],PACKET_SIZE_PER);
 		
 		rev_data_len++;
 		/*meet four LBA or trans finished*/
@@ -291,6 +299,7 @@ static void usb_put_one_sector(uint8_t *host_data)
 	usb_device->INDEX_REG = ENDPOINT1;
 	/*transmit 512byte per*/
 	do{
+		#if 1
 		for(cnt = 0;cnt < 64;cnt++)
 		{
 			usb_device->fifo[ENDPOINT1].EP_FIFO_REG = host_data[trans_data_num];
@@ -300,10 +309,13 @@ static void usb_put_one_sector(uint8_t *host_data)
 		/*fifo ready*/
 		usb_device->EP0_CSR_IN_CSR1_REG &= (~EPI_WR_BITS) ;
 		usb_device->EP0_CSR_IN_CSR1_REG |= IN_IN_PKT_RDY;
+		#endif
+		//usb_set_fifo((uint8_t *)host_data[trans_data_num *ENDPOINT1_SIZE],ENDPOINT1_SIZE);
+		//trans_data_num++;
 		host_recv_flag = 0;
 		while(!host_recv_flag)
 			;
-		if(trans_data_num == PACKET_SEIZE_PER)
+		if(trans_data_num == PACKET_SIZE_PER)
 			break;				
 	}while(1);
 
@@ -316,9 +328,10 @@ void usb_buckonly_in()
 	uint32_t lpn;
 	uint8_t offset;
 	uint32_t trans_data_cnt;
-	uint8_t host_data[PACKET_SEIZE_PER];
+	uint8_t host_data[PACKET_SIZE_PER];
 	uint32_t prev_lpn = 0xEfffffff;
 	
+	usb_fill_buf(r_buf,0xFFFFFFFF,PAGE_SIZE);
 	while(sec_cnt != trans_data_cnt)
 	{
 		//init_512byte_data((char *)&host_data, 1, lba);
@@ -329,18 +342,18 @@ void usb_buckonly_in()
 			usb_read(lpn,(uint8_t *)&r_buf[0]);
 			prev_lpn = lpn;
 		}
-		usb_mem_copy((uint8_t *)&r_buf[offset*PACKET_SEIZE_PER],(uint8_t *)&host_data,PACKET_SEIZE_PER);
+		usb_mem_copy((uint8_t *)&r_buf[offset*PACKET_SIZE_PER],(uint8_t *)&host_data,PACKET_SIZE_PER);
 		/*trans 512 byte*/	
 		usb_put_one_sector((uint8_t *)&host_data);
 		lba++;
-		trans_data_cnt++;
-		
+		trans_data_cnt++;		
 	}
 	/*trans finish or no data*/
 	buckonly = BUCK_ONLY_STS_STAGE;
 }
 void usb_buckonly_sts()
 {
+	
 	usb_csw.dCSWSignature[0] = 0x55;   
 	usb_csw.dCSWSignature[1] = 0x53;   
 	usb_csw.dCSWSignature[2] = 0x42;   
@@ -355,6 +368,7 @@ void usb_buckonly_sts()
 	usb_csw.dCSWDataResidue[3] = 0;
 	usb_csw.bCSWStatus = 0; 
 	usb_set_fifo((uint8_t *)&usb_csw,sizeof(usb_csw_t));
+		
 	buckonly = BUCK_ONLY_IDLE;
 
 }
@@ -406,7 +420,6 @@ void init_512byte_data(char *data,int sec_num,int lba)
 	}
 }
 
-
 static void usb_cpu_init(void)
 {
 	S3C24X0_GPIO  *const gpio =S3C24X0_GetBase_GPIO();
@@ -429,7 +442,6 @@ static void usb_reg_config(void)
 {
 
 	S3C24X0_USB_DEVICE * const usb_device = S3C24X0_GetBase_USB_DEVICE();
-
 	usb_device->PWR_REG = 0x0;
 	/*sel endpoint0*/
 	usb_device->INDEX_REG = ENDPOINT0;
